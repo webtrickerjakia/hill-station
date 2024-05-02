@@ -71,98 +71,98 @@ observer.observe(findUsBanner);
 
 
 
-// map tab
+// // map tab
 
-        $('.map').not(':first').hide();
+//         $('.map').not(':first').hide();
     
-        // Function to handle click event of "View on Map" buttons
-        $('.viewmaplink').on('click', function() {
-            // Hide all map containers
-            $('.map').hide();
+//         // Function to handle click event of "View on Map" buttons
+//         $('.viewmaplink').on('click', function() {
+//             // Hide all map containers
+//             $('.map').hide();
             
-            // Extract the target map id from the clicked button's data-target attribute
-            var targetMapId = $(this).data('target');
+//             // Extract the target map id from the clicked button's data-target attribute
+//             var targetMapId = $(this).data('target');
             
-            // Show the map container corresponding to the targetMapId
-            $('#' + targetMapId).show();
-        });
+//             // Show the map container corresponding to the targetMapId
+//             $('#' + targetMapId).show();
+//         });
 
 
-         // Function to show dropdown based on search input
-         function showDropdown() {
-            var input, filter, dropdown, locations, i, txtValue;
-            input = document.getElementById("locationName");
-            filter = input.value.toUpperCase();
-            dropdown = document.getElementById("locationDropdown");
-            locations = document.querySelectorAll(".location-near-you-box");
+//          // Function to show dropdown based on search input
+//          function showDropdown() {
+//             var input, filter, dropdown, locations, i, txtValue;
+//             input = document.getElementById("locationName");
+//             filter = input.value.toUpperCase();
+//             dropdown = document.getElementById("locationDropdown");
+//             locations = document.querySelectorAll(".location-near-you-box h4");
 
-            // Clear previous dropdown items
-            dropdown.innerHTML = "";
+//             // Clear previous dropdown items
+//             dropdown.innerHTML = "";
 
-            // Display matching locations in dropdown
-            locations.forEach(function(location) {
-                var locationName = location.innerText.toUpperCase();
-                if (locationName.includes(filter)) {
-                    var dropdownItem = document.createElement("div");
-                    dropdownItem.innerText = location.innerText;
-                    dropdownItem.classList.add("dropdown-item");
-                    dropdownItem.addEventListener("click", function() {
-                        input.value = location.innerText;
-                        filterLocations();
-                        dropdown.style.display = "none";
-                    });
-                    dropdown.appendChild(dropdownItem);
-                }
-            });
+//             // Display matching locations in dropdown
+//             locations.forEach(function(location) {
+//                 var locationName = location.innerText.toUpperCase();
+//                 if (locationName.includes(filter)) {
+//                     var dropdownItem = document.createElement("div");
+//                     dropdownItem.innerText = location.innerText;
+//                     dropdownItem.classList.add("dropdown-item");
+//                     dropdownItem.addEventListener("click", function() {
+//                         input.value = location.innerText;
+//                         filterLocations();
+//                         dropdown.style.display = "none";
+//                     });
+//                     dropdown.appendChild(dropdownItem);
+//                 }
+//             });
 
-            // Show or hide the dropdown
-            dropdown.style.display = filter === "" ? "none" : "block";
-        }
+//             // Show or hide the dropdown
+//             dropdown.style.display = filter === "" ? "none" : "block";
+//         }
 
-        // Function to filter locations based on search and selected location
-        function filterLocations() {
-            var selectedLocation = $("#store-category").val();
-            var searchInput = $("#locationName").val().toUpperCase();
-            $(".csl-list-item").each(function() {
-                var locationName = $(this).find("h4").text().toUpperCase();
-                if (locationName.includes(searchInput) && (!selectedLocation || $(this).hasClass(selectedLocation))) {
-                    $(this).show();
-                } else {
-                    $(this).hide();
-                }
-            });
-        }
+//         // Function to filter locations based on search and selected location
+//         function filterLocations() {
+//             var selectedLocation = $("#store-category").val();
+//             var searchInput = $("#locationName").val().toUpperCase();
+//             $(".csl-list-item").each(function() {
+//                 var locationName = $(this).find("h4").text().toUpperCase();
+//                 if (locationName.includes(searchInput) && (!selectedLocation || $(this).hasClass(selectedLocation))) {
+//                     $(this).show();
+//                 } else {
+//                     $(this).hide();
+//                 }
+//             });
+//         }
 
-        // Event listener for search input
-        $("#locationName").on("keyup", function() {
-            showDropdown();
-        });
+//         // Event listener for search input
+//         $("#locationName").on("keyup", function() {
+//             showDropdown();
+//         });
 
-        // Event listener for search button
-        $("#locationSearchForm").submit(function(event) {
-            event.preventDefault();
-            filterLocations();
-        });
+//         // Event listener for search button
+//         $("#locationSearchForm").submit(function(event) {
+//             event.preventDefault();
+//             filterLocations();
+//         });
 
-        // Event listener for select location dropdown
-        $("#store-category").on("change", function() {
-            filterLocations();
-        });
+//         // Event listener for select location dropdown
+//         $("#store-category").on("change", function() {
+//             filterLocations();
+//         });
 
 
-       // Event listener for reset button
-   document.getElementById("resetButton").addEventListener("click", function() {
-    resetForm();
-   });
+//        // Event listener for reset button
+//    document.getElementById("resetButton").addEventListener("click", function() {
+//     resetForm();
+//    });
 
-// Function to reset form and reload page
-function resetForm() {
-    // Reset the form
-    document.getElementById("locationSearchForm").reset();
+// // Function to reset form and reload page
+// function resetForm() {
+//     // Reset the form
+//     document.getElementById("locationSearchForm").reset();
 
-    // Reload the page
-    location.reload();
-}
+//     // Reload the page
+//     location.reload();
+// }
 
 
 
@@ -186,7 +186,6 @@ function resetForm() {
 // // Call the function to add the animation
 // addHeadShakeAnimation();
 
-        
 
 
 

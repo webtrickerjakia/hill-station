@@ -7165,7 +7165,97 @@
     <script type="text/javascript" src="js/jquery.selectric.min.js" defer></script>
     <script type="text/javascript" src="js/common-scripts.js" defer></script>
    
-  
+    <script>
+        $(document).ready(function() {
+            // Hide all map containers except the first one
+            $('.map').not(':first').hide();
+    
+            // Function to handle click event of "View on Map" buttons
+            $('.viewmaplink').on('click', function() {
+                // Hide all map containers
+                $('.map').hide();
+                
+                // Extract the target map id from the clicked button's data-target attribute
+                var targetMapId = $(this).data('target');
+                
+                // Show the map container corresponding to the targetMapId
+                $('#' + targetMapId).show();
+            });
+    
+            // Function to show dropdown based on search input
+            function showDropdown() {
+                var input, filter, dropdown, locations;
+                input = $("#locationName");
+                filter = input.val().toUpperCase();
+                dropdown = $("#locationDropdown");
+                locations = $(".location-near-you-box h4");
+    
+                // Clear previous dropdown items
+                dropdown.empty();
+    
+                // Display matching locations in dropdown
+                locations.each(function() {
+                    var locationName = $(this).text().toUpperCase();
+                    if (locationName.includes(filter)) {
+                        var dropdownItem = $("<div>").text($(this).text()).addClass("dropdown-item");
+                        dropdownItem.on("click", function() {
+                            input.val($(this).text());
+                            filterLocations();
+                            dropdown.hide();
+                        });
+                        dropdown.append(dropdownItem);
+                    }
+                });
+    
+                // Show or hide the dropdown
+                dropdown.css("display", filter === "" ? "none" : "block");
+            }
+    
+            // Function to filter locations based on search and selected location
+            function filterLocations() {
+                var selectedLocation = $("#store-category").val();
+                var searchInput = $("#locationName").val().toUpperCase();
+                $(".csl-list-item").each(function() {
+                    var locationName = $(this).find("h4").text().toUpperCase();
+                    if (locationName.includes(searchInput) && (!selectedLocation || $(this).hasClass(selectedLocation))) {
+                        $(this).show();
+                    } else {
+                        $(this).hide();
+                    }
+                });
+            }
+    
+            // Event listener for search input
+            $("#locationName").on("keyup", function() {
+                showDropdown();
+            });
+    
+            // Event listener for search button
+            $("#locationSearchForm").on("submit", function(event) {
+                event.preventDefault();
+                filterLocations();
+            });
+    
+            // Event listener for select location dropdown
+            $("#store-category").on("change", function() {
+                filterLocations();
+            });
+    
+            // Event listener for reset button
+            $("#resetButton").on("click", function() {
+                resetForm();
+            });
+    
+            // Function to reset form and reload page
+            function resetForm() {
+                // Reset the form
+                $("#locationSearchForm")[0].reset();
+    
+                // Reload the page
+                location.reload();
+            }
+        });
+    </script>
   
 </body>
 
