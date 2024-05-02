@@ -172,5 +172,40 @@
         <script type="text/javascript" src="js/jquery-3.5.1.min.js"></script>
         <script type="text/javascript" src="js/slick.min.js" defer></script>
         <script type="text/javascript" src="js/common-scripts.js" defer></script>
+        <script>var $animation_elements = $('.animation-element');
+            var $window = $(window);
+            var animation_triggered = false; // Flag to track animation trigger
+            var last_scroll_top = 0;
+            
+            function check_if_in_view() {
+                var window_top_position = $window.scrollTop();
+                var window_height = $window.height();
+            
+                $.each($animation_elements, function () {
+                    var $element = $(this);
+                    var element_height = $element.outerHeight();
+                    var element_top_position = $element.offset().top;
+                    var element_bottom_position = element_top_position + element_height;
+            
+                    // Check if the element is in the viewport and the user is scrolling down
+                    if (element_bottom_position >= window_top_position && element_top_position <= window_top_position + window_height && window_top_position > last_scroll_top) {
+                        $element.addClass('in-view');
+                        if (!animation_triggered) {
+                            animation_triggered = true;
+                        }
+                    } else {
+                        // If animation has not been triggered yet, keep the animation class applied
+                        if (!animation_triggered) {
+                            $element.removeClass('in-view');
+                        }
+                    }
+                });
+            
+                last_scroll_top = window_top_position;
+            }
+            
+            $window.on('scroll resize', check_if_in_view);
+            $window.trigger('scroll', check_if_in_view);
+            </script>
     </body>
 </html>
